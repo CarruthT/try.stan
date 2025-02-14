@@ -5,40 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fdf5e6;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #f4e5c3;
-            border-bottom: 1px solid #ccc;
-            padding: 10px 20px;
-        }
-        nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        main {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 10px 0;
-        }
-        audio {
-            margin: 10px 0;
-        }
+        body { font-family: Arial, sans-serif; background-color: #fdf5e6; margin: 0; padding: 0; }
+        header { background-color: #f4e5c3; border-bottom: 1px solid #ccc; padding: 10px 20px; }
+        nav a { margin: 0 10px; text-decoration: none; color: #333; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        main { padding: 20px; max-width: 800px; margin: auto; }
+        img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
+        audio { margin: 10px 0; }
     </style>
 </head>
 <body>
@@ -58,36 +31,16 @@
         <h1>Projects</h1>
         <p>Welcome to my projects archive. Click on a post to view it.</p>
         <ul id="post-list"></ul>
-        <div id="post-content" style="display: none;"></div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         const posts = [
-            { title: 'First Project', file: '/posts/post1.md' },
-            { title: 'Second Project', file: '/posts/post2.md' }
+            { title: 'First Project', file: 'post.html?post=post1' },
+            { title: 'Second Project', file: 'post.html?post=post2' }
         ];
 
-        const postList = document.getElementById('post-list');
-        const postContent = document.getElementById('post-content');
-
-        postList.innerHTML = posts
-            .map(
-                (post, index) =>
-                    `<li><a href="#" onclick="loadMarkdown('${post.file}'); return false;">${index + 1}. ${post.title}</a></li>`
-            )
+        document.getElementById('post-list').innerHTML = posts
+            .map((post, index) => `<li><a href="${post.file}">${index + 1}. ${post.title}</a></li>`)
             .join('');
-
-        async function loadMarkdown(filePath) {
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) throw new Error(`Failed to fetch ${filePath}`);
-                const markdown = await response.text();
-                postContent.innerHTML = marked.parse(markdown);
-                postContent.style.display = 'block';
-            } catch (error) {
-                console.error('Error loading markdown:', error);
-            }
-        }
     </script>
 </body>
 </html>

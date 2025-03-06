@@ -3,53 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>trystan.xyz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fdf5e6;
+            background-color: #317842f9;
+            color: #f0f0f0;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #f4e5c3;
-            border-bottom: 1px solid #ccc;
-            padding: 10px 20px;
+        header, footer {
+            background-color: #317842f9;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        nav {
+            text-align: left;
+            margin-bottom: 20px;
         }
         nav a {
-            margin: 0 10px;
+            margin-right: 15px;
             text-decoration: none;
-            color: #333;
+            color: #cbecd3f9;
+            font-family: monospace;
             font-weight: bold;
         }
         nav a:hover {
             text-decoration: underline;
         }
         main {
-            padding: 20px;
             max-width: 800px;
-            margin: auto;
+            margin: 0 auto;
+            padding: 20px 20px;
+        }
+        h1 {
+            font-family: monospace;
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+        .caption {
+            font-size: 14px;
+            color: #cbecd3f9;
+            font-family: monospace;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        footer nav {
+            text-align: left;
         }
     </style>
+    <!-- Standard Favicon -->
+<link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+
+<!-- PNG Favicons for Modern Browsers -->
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+
+<!-- Apple Touch Icon for iOS -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+
+<!-- Manifest for Web Apps -->
+<link rel="manifest" href="/images/favicon/site.webmanifest">
+
+<!-- Theme Color (Optional for PWA Support) -->
+<meta name="theme-color" content="#ffffff">
+
 </head>
 <body>
     <header>
-        <a href="index.html" class="weird-icon" id="home-icon" style="display: inline-block; margin-right: 20px;">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#333" stroke-width="2"/>
-            </svg>
-        </a>
-        <nav style="display: inline;">
-            <a href="about.html">About</a>
-            <a href="projects.html">Projects</a>
-            <a href="sound.html">Sound</a>
-        </nav>
+        <div class="container">
+            <nav>
+                <a href="/index.html">[trystan.xyz]</a>
+                <a href="/cv/">[cv]</a>
+                <a href="/projects/">[projects]</a>
+                <a href="/sound/">[sound]</a>
+            </nav>            
+        </div>
     </header>
-    
-    <main>
-        <h1>Welcome to My Website</h1>
-        <p>This is the home page. Navigate using the links above.</p>
+    <main class="container">
+        <h1>Trystan Carruth</h1>
+        <p class="caption">Currently in: Grand Junction, CO</p>
+        <p>Hi, I'm Trystan</p>
+        <p>
+            I am broadly interested in network representations of information (graph theory), city planning, and predictive modeling.
+        </p>
+        <p>
+            My background is in Applied Math and Public Health. My specialty is in quantitatively researching and understanding complex systems. 
+        </p>
+        <p>
+            Currently, my full-time job is as a Software Developer and Data Analyst at Monument Health (a clinically integrated network). I build software to help non-technical users access data for operational use. (<a href="#" style="color: #cbecd3f9; text-decoration: underline;">Monument Health</a>)
+        </p>
+        <p>
+            This website serves as a sampling of what I am currently thinking about, my technical projects, and my creative work (which may intersect).
+        </p>
     </main>
-    
+    <footer>
+        <div class="container">
+            <nav>
+                <a href="https://linkedin.com/in/Trystan-Carruth" target="_blank">[LinkedIn]</a>
+                <a href="https://github.com/CarruthT" target="_blank">[GitHub]</a>
+                <a href="mailto:trystaned@gmail.com">[Email]</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 </html>

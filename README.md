@@ -1,1 +1,1 @@
-Repository for personal website: trystan.xyz
+Repository for personal website: [trystan.xyz](trystan.xyz)

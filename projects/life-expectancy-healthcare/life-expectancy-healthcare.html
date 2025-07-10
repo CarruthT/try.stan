@@ -28,8 +28,8 @@
                 Regression analysis is integrated to forecast this relationship, providing insights into potential future trends. The application also presents relevant statistics comparing life expectancy and health expenditure across different healthcare system types, along with model performance metrics and coefficients.
             </p>
             <figure class="fullwidth">
-                <img src="https://github.com/CarruthT/Health-Expenditure-and-Life-Expectancy-Data-Analysis-and-Web-Scraping/assets/97051391/c95e5e2f-49ed-410d-a645-98f00468cd7" alt="Screenshot of the Streamlit application">
-                <figcaption>Figure 1: Screenshot of the Streamlit application interface, showing data visualization and analysis of life expectancy and health expenditure.</figcaption>
+                <img src="https://github.com/CarruthT/Health-Expenditure-and-Life-Expectancy-Data-Analysis-and-Web-Scraping/assets/97051391/c95e5e2f-49ed-410d-a645-98f004688cd7" alt="Animated screenshot of the Streamlit application displaying data visualizations.">
+                <figcaption>Figure 1: Animated screenshot of the Streamlit application interface, showing interactive data visualization and analysis of life expectancy and health expenditure.</figcaption>
             </figure>
         </section>
 
@@ -57,17 +57,6 @@
         </section>
 
         <section>
-            <h2>Technical Details and Packages</h2>
-            <p>
-                The application is built using <code class="code">streamlit</code> in Python. Key packages utilized for the application's functionality include:
-                <code class="code">pandas</code>, <code class="code">numpy</code>, <code class="code">streamlit</code>, <code class="code">matplotlib.pyplot</code>, <code class="code">plotly.express</code>, <code class="code">plotly.graph_objs</code>, <code class="code">sklearn.linear_model</code>, and <code class="code">sklearn.metrics</code>.
-            </p>
-            <p>
-                The data collection involved web scraping, implemented in a separate notebook (<code class="code">datacollection.ipynb</code>). For this, the following Python packages were essential: <code class="code">bs4</code> (Beautiful Soup for parsing HTML), <code class="code">requests</code> (for making HTTP requests), <code class="code">pandas</code>, and <code class="code">numpy</code>.
-            </p>
-        </section>
-
-        <section>
             <h2>Data Sources</h2>
             <p>
                 Data for this project was primarily collected via web scraping from Wikipedia pages, as detailed in the <code class="code">datacollection.ipynb</code> notebook.
@@ -77,8 +66,10 @@
                 <li>Health expenditure data: <a href="https://apps.who.int/nha/database/Select/Indicators/en" target="_blank" rel="noopener noreferrer">World Health Organization</a></li>
                 <li>Universal healthcare coverage data: Compiled from multiple sources cited on this <a href="https://en.wikipedia.org/wiki/Health_care_systems_by_country" target="_blank" rel="noopener noreferrer">Wikipedia page</a>.</li>
             </ul>
-            <p class="marginnote">
-                It should be noted that some data was excluded for the purpose of comparison. Regions not present on all data sets were filtered out to ensure consistent comparisons.
+            <p>
+                <label for="mn-data-exclusion" class="margin-toggle">⊕</label>
+                <input type="checkbox" id="mn-data-exclusion" class="margin-toggle"/>
+                <span class="marginnote">It should be noted that some data was excluded for the purpose of comparison. Regions not present on all data sets were filtered out to ensure consistent comparisons.</span>
             </p>
         </section>
 

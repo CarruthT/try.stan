@@ -20,42 +20,61 @@
         <p><span class="newthought">This project</span> focuses on the analysis and forecasting of Dengue Fever cases in Brazil, utilizing data from the World Health Organization (WHO).</p>
 
         <section>
-            <h2>Data Wrangling and Cleaning</h2>
+            <h2>Data Source & Wrangling</h2>
             <p>
-                The initial phase involved minor cleaning and wrangling of the WHO dataset. This included adding new columns to track the change in values over time, which is crucial for epidemiological comparisons. Redundant or unneeded values were also dropped to streamline the dataset for analysis.
+                The primary dataset for this project was obtained from the <a href="https://www3.paho.org/data/index.php/en/mnu-topics/indicadores-dengue-en/dengue-nacional-en/252-dengue-pais-ano-en.html" target="_blank" rel="noopener noreferrer">Pan American Health Organization (PAHO)</a>, specifically their Dengue Fever indicators for Brazil.
+            </p>
+            <p>
+                The initial phase involved minor cleaning and wrangling of this dataset for epidemiological comparison. This included adding new columns to track the change in values over time, which is crucial for understanding disease progression. Redundant or unneeded values were also dropped to streamline the dataset for analysis.
             </p>
         </section>
 
         <section>
-            <h2>Forecasting with SARIMA</h2>
+            <h2>Forecasting Methodology: SARIMA</h2>
             <p>
-                Forecasting was primarily performed using the **Seasonal Auto-Regressive Integrated Moving Average (SARIMA)** model. This model was chosen for its appropriateness in handling time series data that exhibits seasonal patterns and non-stationarity, both common characteristics in infectious disease epidemiology.
+                Forecasting was primarily performed using the **Seasonal Auto-Regressive Integrated Moving Average (SARIMA)** model. This model was appropriate in taking into account the seasonal, non-stationary, and with more work the exogenous nature of infectious disease.
                 <label for="sn-sarima-note" class="margin-toggle sidenote-number"></label>
                 <input type="checkbox" id="sn-sarima-note" class="margin-toggle"/>
-                <span class="sidenote">SARIMA models extend ARIMA models by incorporating seasonal components, making them suitable for data with recurring patterns like disease outbreaks.</span>
+                <span class="sidenote">SARIMA models extend ARIMA models by incorporating seasonal components, making them suitable for data with recurring patterns like disease outbreaks and annual cycles.</span>
             </p>
             <p>
-                Currently, the model is a pure SARIMA implementation. While SARIMA can account for the seasonal and non-stationary nature of infectious disease data, it does not yet incorporate exogenous factors. Factors such as weather patterns, public health interventions, and population density are known to influence disease transmission.
+                Currently, this is only a SARIMA model. External factors like weather, public health interventions, and population density have not yet been included. These exogenous variables play a significant role in infectious disease dynamics, and their integration would enhance model accuracy.
                 <label for="mn-future-work" class="margin-toggle">⊕</label>
                 <input type="checkbox" id="mn-future-work" class="margin-toggle"/>
                 <span class="marginnote">Future work will involve integrating these external factors to enhance the model's predictive accuracy and provide a more comprehensive understanding of dengue fever dynamics.</span>
             </p>
-        </section>
-
-        <section>
-            <h2>Key Contributions</h2>
-            <ul>
-                <li><strong>Data Preparation:</strong> Developed a clean and structured dataset from raw WHO data, including calculated change metrics.</li>
-                <li><strong>Model Selection:</strong> Applied the SARIMA model, demonstrating its utility for infectious disease forecasting.</li>
-                <li><strong>Foundation for Future Work:</strong> Established a base model that can be extended with external covariates for more robust predictions.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>View the Code</h2>
-            <p>The source code for this project is available on GitHub:</p>
             <p>
-                <a href="https://github.com/CarruthT/DengueFeverForecasting" target="_blank" rel="noopener noreferrer">CarruthT/DengueFeverForecasting on GitHub</a>
+                This forecasting was specifically conducted to predict the year 2023 data, utilizing only historical data available up to March of that year.
+            </p>
+        </section>
+
+        <section>
+            <h2>Data Visualizations and Predictions</h2>
+            <p>
+                The model predicts, with increasingly large confidence intervals, that Dengue Fever cases will decrease until eventually having a minor spike comparable with past seasons. Uniquely, this model predicts a historically low Dengue Fever season for 2023, with predictions hitting 0 new cases for some weeks.
+            </p>
+            <figure class="fullwidth">
+                <img src="https://github.com/CarruthT/DengueFeverForecasting/assets/97051391/8458f7a6-72e4-45aa-a0f4-a2ae5dddb548" alt="Dengue Fever Case Forecast">
+                <figcaption>Figure 1: Forecasted Dengue Fever Cases with Confidence Intervals. The model predicts a decrease in cases, with some weeks hitting zero, indicating a potentially historically low season for 2023.</figcaption>
+            </figure>
+
+            <p>
+                Dengue Fever total Deaths are predicted to be somewhat comparably low overall with a similar S-curve. Notably, these confidence intervals get incredibly wide, with 2022 Dengue Fever deaths being comparable and possible for this Dengue Fever season.
+            </p>
+            <figure class="fullwidth">
+                <img src="https://github.com/CarruthT/DengueFeverForecasting/assets/97051391/8aa56a98-3fbd-42c2-adf7-68770051da2e" alt="Dengue Fever Death Forecast">
+                <figcaption>Figure 2: Forecasted Dengue Fever Deaths with Confidence Intervals. Predictions show relatively low deaths, but wide confidence intervals suggest the possibility of similar death tolls to 2022.</figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Contributions</h2>
+            <p>All work on this project was completed by Trystan Carruth.</p>
+            <p>
+                Email: <a href="mailto:Trystaned@gmail.com">Trystaned@gmail.com</a>
+            </p>
+            <p>
+                <a href="https://github.com/CarruthT/DengueFeverForecasting" target="_blank" rel="noopener noreferrer">View the full project on GitHub</a>
             </p>
         </section>
     </article>

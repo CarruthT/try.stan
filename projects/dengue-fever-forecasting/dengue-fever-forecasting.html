@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dengue Fever Forecasting - CarruthT</title>
+    <link rel="stylesheet" href="/css/tufte.css"/>
+    <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <article>
+        <h1>Dengue Fever Forecasting in Brazil</h1>
+        <p class="subtitle">WHO data wrangling and time series analysis</p>
+
+        <p><span class="newthought">This project</span> focuses on the analysis and forecasting of Dengue Fever cases in Brazil, utilizing data from the World Health Organization (WHO).</p>
+
+        <section>
+            <h2>Data Wrangling and Cleaning</h2>
+            <p>
+                The initial phase involved minor cleaning and wrangling of the WHO dataset. This included adding new columns to track the change in values over time, which is crucial for epidemiological comparisons. Redundant or unneeded values were also dropped to streamline the dataset for analysis.
+            </p>
+        </section>
+
+        <section>
+            <h2>Forecasting with SARIMA</h2>
+            <p>
+                Forecasting was primarily performed using the **Seasonal Auto-Regressive Integrated Moving Average (SARIMA)** model. This model was chosen for its appropriateness in handling time series data that exhibits seasonal patterns and non-stationarity, both common characteristics in infectious disease epidemiology.
+                <label for="sn-sarima-note" class="margin-toggle sidenote-number"></label>
+                <input type="checkbox" id="sn-sarima-note" class="margin-toggle"/>
+                <span class="sidenote">SARIMA models extend ARIMA models by incorporating seasonal components, making them suitable for data with recurring patterns like disease outbreaks.</span>
+            </p>
+            <p>
+                Currently, the model is a pure SARIMA implementation. While SARIMA can account for the seasonal and non-stationary nature of infectious disease data, it does not yet incorporate exogenous factors. Factors such as weather patterns, public health interventions, and population density are known to influence disease transmission.
+                <label for="mn-future-work" class="margin-toggle">⊕</label>
+                <input type="checkbox" id="mn-future-work" class="margin-toggle"/>
+                <span class="marginnote">Future work will involve integrating these external factors to enhance the model's predictive accuracy and provide a more comprehensive understanding of dengue fever dynamics.</span>
+            </p>
+        </section>
+
+        <section>
+            <h2>Key Contributions</h2>
+            <ul>
+                <li><strong>Data Preparation:</strong> Developed a clean and structured dataset from raw WHO data, including calculated change metrics.</li>
+                <li><strong>Model Selection:</strong> Applied the SARIMA model, demonstrating its utility for infectious disease forecasting.</li>
+                <li><strong>Foundation for Future Work:</strong> Established a base model that can be extended with external covariates for more robust predictions.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>View the Code</h2>
+            <p>The source code for this project is available on GitHub:</p>
+            <p>
+                <a href="https://github.com/CarruthT/DengueFeverForecasting" target="_blank" rel="noopener noreferrer">CarruthT/DengueFeverForecasting on GitHub</a>
+            </p>
+        </section>
+    </article>
+</body>
+</html>

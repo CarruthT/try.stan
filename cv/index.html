@@ -45,6 +45,20 @@
             font-size: 36px;
             margin-bottom: 5px;
         }
+        h2 {
+            font-family: monospace;
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
         .caption {
             font-size: 14px;
             color: #111111;
@@ -54,25 +68,45 @@
         p {
             font-size: 18px;
             line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+        }
+        .job-title, .degree-info {
+            font-weight: bold;
+        }
+        .company-location, .university-location {
+            font-style: italic;
+            color: #555;
+        }
+        .dates {
+            float: right;
+            color: #555;
         }
         footer nav {
             text-align: left;
         }
     </style>
-    <!-- Standard Favicon -->
-<link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
 
-<!-- PNG Favicons for Modern Browsers -->
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
 
-<!-- Apple Touch Icon for iOS -->
 <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
 
-<!-- Manifest for Web Apps -->
 <link rel="manifest" href="/images/favicon/site.webmanifest">
 
-<!-- Theme Color (Optional for PWA Support) -->
 <meta name="theme-color" content="#ffffff">
 
 </head>
@@ -89,7 +123,66 @@
     </header>
     <main class="container">
         <h1>Trystan Carruth</h1>
-        <p class="caption">Grand Junction, CO</p>
+
+        ---
+
+        <h2>Experience</h2>
+
+        <div class="experience-item">
+            <span class="job-title">Software Developer and Data Analyst</span><span class="dates">Apr 2024 - Present</span><br>
+            <span class="company-location">Monument Health, Grand Junction, CO</span>
+            <ul>
+                <li>**Sole Developer** for a custom CRM platform, managing **100K+ rows of inter-related data** to drive critical operational automations and streamline data workflows across providers, practices, and stakeholders.</li>
+                <li>Designed and implemented **Python APIs** to access Creatio OData and deployed **Google Cloud Functions** for automated data ingestion and updating, ensuring data consistency and real-time operational insights.</li>
+                <li>Developed a suite of **C# applications and Creatio integrations** enabling advanced user actions such as task delegation, bulk case management, and dynamic data manipulation.</li>
+                <li>Led iterative development cycles using **Agile methodologies**, gathering requirements in weekly sprints, delivering two major releases, and enhancing usability with custom JavaScript UI/UX.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <span class="job-title">Data Science and Software Development Intern</span><span class="dates">Nov 2021 - Jun 2023</span><br>
+            <span class="company-location">The Johns Hopkins University Applied Physics Laboratory, Laurel, MD</span><br>
+            <span>Dept: Research and Exploratory Development: Human and Machine Intelligence Research Group</span><br>
+            <span>Project: Cohort Research Investigating Micro-Scale Optimized Networks</span>
+            <ul>
+                <li>**Gamification of Connectomics:** Developed a video game to encourage citizen science for refining computer vision algorithms that map brain connections. Responsible for gameplay design, physics/collision, movement systems, UI/UX, and data persistence using C#.</li>
+                <li>**Wastewater Disease Testing Optimization:** Achieved a podium finish in a hackathon by optimizing wastewater testing locations using hierarchical graph and resource constraint optimization algorithms (DotMotif) to improve public health resource allocation for COVID-19 and Monkeypox.</li>
+                <li>**Vaccine Sentiment Analysis and Prediction:** Performed sentiment analysis on 30,000 COVID-19 vaccine-related tweets, classifying them into risk groups. Utilized Python with Numpy, Pandas, Scikit-learn, and NLTK. Conducted regression to forecast sentiment and understand the relationship between vaccine support and content subjectivity.</li>
+                <li>**Neuron Proofreading:** Meticulously proofread neurons in MICrONS Minnie65 brain imaging data (petabyte scale, mm³ visual cortex of a mouse) to establish ground-truth and refine computer vision algorithms, applying neuroanatomy knowledge of various cell types.</li>
+                <li>Received technical training in Python, data science, machine learning, linear algebra, and statistics.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <span class="job-title">Infectious Disease Surveillance Research Assistant</span><span class="dates">Mar 2023 - May 2023</span><br>
+            <span class="company-location">Civilience</span>
+            <ul>
+                <li>Developed novel data collection surveys for high-concern infectious diseases.</li>
+                <li>Conducted literature reviews to create research-driven questions for survey participants.</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <span class="job-title">Gameplay Designer and Sound/Music Specialist</span><span class="dates">Sep 2022 - May 2023</span><br>
+            <span class="company-location">Dark Touch Studios, Baltimore, MD</span>
+            <ul>
+                <li>Designed and balanced gameplay mechanics, character movesets, and combat systems for a 3D fighting game, ensuring a satisfying player experience.</li>
+                <li>Created original music tracks and sound effects, collaborating closely with the development team to ensure audio assets complemented gameplay and visuals.</li>
+            </ul>
+        </div>
+
+        ---
+
+        <h2>Education</h2>
+
+        <div class="education-item">
+            <span class="degree-info">Bachelor of Science - BS Applied Mathematics and Statistics and Public Health Studies</span><br>
+            <span class="university-location">The Johns Hopkins University</span>
+            <ul>
+                <li>Activities and Societies: Hopkins Undergraduate Society for Applied Mathematics, HopAI, Association for Computing Machinery</li>
+            </ul>
+        </div>
+
     </main>
     <footer>
         <div class="container">

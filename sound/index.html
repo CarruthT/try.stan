@@ -43,12 +43,6 @@
         h1 {
             font-family: monospace;
             font-size: 36px;
-            margin-bottom: 5px;
-        }
-        .caption {
-            font-size: 14px;
-            color: #111111;
-            font-family: monospace;
             margin-bottom: 20px;
         }
         p {
@@ -58,23 +52,59 @@
         footer nav {
             text-align: left;
         }
+
+        .track {
+            margin-bottom: 4px;
+        }
+
+        .track-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .play-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #111111;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .play-btn:hover {
+            color: #555;
+        }
+        .play-btn svg {
+            display: block;
+        }
+
+        .track-title {
+            font-size: 18px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .track-image {
+            display: none;
+            margin-top: 8px;
+            max-width: 400px;
+        }
+        .track-image img {
+            width: 100%;
+            display: block;
+        }
+        .track-image.visible {
+            display: block;
+        }
     </style>
-    <!-- Standard Favicon -->
-<link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
-
-<!-- PNG Favicons for Modern Browsers -->
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-
-<!-- Apple Touch Icon for iOS -->
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-
-<!-- Manifest for Web Apps -->
-<link rel="manifest" href="/images/favicon/site.webmanifest">
-
-<!-- Theme Color (Optional for PWA Support) -->
-<meta name="theme-color" content="#ffffff">
-
+    <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
     <header>
@@ -84,12 +114,48 @@
                 <a href="/cv/">[cv]</a>
                 <a href="/projects/">[projects]</a>
                 <a href="/sound/">[sound]</a>
-            </nav>            
+            </nav>
         </div>
     </header>
     <main class="container">
-        <h1>Trystan Carruth</h1>
-        <p class="caption">Grand Junction, CO</p>
+        <h1>Sound</h1>
+
+        <div class="track" data-src="/sound/audio/piece-1.mp3">
+            <div class="track-row">
+                <button class="play-btn" aria-label="Play">
+                    <svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>
+                </button>
+                <p class="track-title">Piece No. 1</p>
+            </div>
+            <div class="track-image">
+                <img src="/sound/images/piece-1.jpg" alt="Piece No. 1">
+            </div>
+        </div>
+
+        <div class="track" data-src="/sound/audio/piece-2.mp3">
+            <div class="track-row">
+                <button class="play-btn" aria-label="Play">
+                    <svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>
+                </button>
+                <p class="track-title">Piece No. 2</p>
+            </div>
+            <div class="track-image">
+                <img src="/sound/images/piece-2.jpg" alt="Piece No. 2">
+            </div>
+        </div>
+
+        <div class="track" data-src="/sound/audio/piece-3.mp3">
+            <div class="track-row">
+                <button class="play-btn" aria-label="Play">
+                    <svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>
+                </button>
+                <p class="track-title">Piece No. 3</p>
+            </div>
+            <div class="track-image">
+                <img src="/sound/images/piece-3.jpg" alt="Piece No. 3">
+            </div>
+        </div>
+
     </main>
     <footer>
         <div class="container">
@@ -100,5 +166,49 @@
             </nav>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            const PLAY  = `<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>`;
+            const PAUSE = `<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><rect x="0" y="0" width="3.5" height="13"/><rect x="7.5" y="0" width="3.5" height="13"/></svg>`;
+
+            let current = null;
+
+            document.querySelectorAll('.track').forEach(function(trackEl) {
+                const src   = trackEl.dataset.src;
+                const btn   = trackEl.querySelector('.play-btn');
+                const img   = trackEl.querySelector('.track-image');
+                let audio   = null;
+
+                function initAudio() {
+                    if (audio) return;
+                    audio = new Audio(src);
+                    audio.addEventListener('ended', stopCurrent);
+                }
+
+                function stopCurrent() {
+                    if (!current) return;
+                    current.audio.pause();
+                    current.btn.innerHTML = PLAY;
+                    current.btn.setAttribute('aria-label', 'Play');
+                    current.img.classList.remove('visible');
+                    current = null;
+                }
+
+                btn.addEventListener('click', function() {
+                    const isPlaying = current && current.trackEl === trackEl;
+                    stopCurrent();
+                    if (!isPlaying) {
+                        initAudio();
+                        audio.play().catch(function(){});
+                        btn.innerHTML = PAUSE;
+                        btn.setAttribute('aria-label', 'Pause');
+                        img.classList.add('visible');
+                        current = { trackEl, audio, btn, img };
+                    }
+                });
+            });
+        })();
+    </script>
 </body>
 </html>

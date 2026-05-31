@@ -56,13 +56,11 @@
         .track {
             margin-bottom: 4px;
         }
-
         .track-row {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .play-btn {
             background: none;
             border: none;
@@ -73,12 +71,8 @@
             align-items: center;
             flex-shrink: 0;
         }
-        .play-btn:hover {
-            color: #555;
-        }
-        .play-btn svg {
-            display: block;
-        }
+        .play-btn:hover { color: #555; }
+        .play-btn svg { display: block; }
 
         .track-title {
             font-size: 18px;
@@ -95,9 +89,7 @@
             width: 100%;
             display: block;
         }
-        .track-image.visible {
-            display: block;
-        }
+        .track-image.visible { display: block; }
 
         .scrub-row {
             display: none;
@@ -106,9 +98,8 @@
             max-width: 400px;
             margin-top: 6px;
         }
-        .scrub-row.visible {
-            display: flex;
-        }
+        .scrub-row.visible { display: flex; }
+
         .scrub-time {
             font-family: monospace;
             font-size: 11px;
@@ -116,7 +107,6 @@
             white-space: nowrap;
         }
 
-        /* shared range style */
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -142,11 +132,8 @@
             cursor: pointer;
         }
 
-        .scrub-slider {
-            flex: 1;
-        }
+        .scrub-slider { flex: 1; }
 
-        /* volume */
         .volume-row {
             display: flex;
             align-items: center;
@@ -158,9 +145,7 @@
             font-size: 13px;
             color: #555;
         }
-        #volume {
-            width: 80px;
-        }
+        #volume { width: 80px; }
     </style>
     <link rel="icon" href="/images/favicon/favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
@@ -251,95 +236,104 @@
     </footer>
 
     <script>
-        (function () {
-            const PLAY  = `<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>`;
-            const PAUSE = `<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><rect x="0" y="0" width="3.5" height="13"/><rect x="7.5" y="0" width="3.5" height="13"/></svg>`;
+        var PLAY  = '<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><path d="M0 0 L11 6.5 L0 13 Z"/></svg>';
+        var PAUSE = '<svg width="11" height="13" viewBox="0 0 11 13" fill="currentColor"><rect x="0" y="0" width="3.5" height="13"/><rect x="7.5" y="0" width="3.5" height="13"/></svg>';
 
-            const volumeSlider = document.getElementById('volume');
-            let current = null;
+        var volumeSlider = document.getElementById('volume');
+        var current = null;
 
-            function fmt(s) {
-                if (!isFinite(s)) return '0:00';
-                return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+        function fmt(s) {
+            if (!isFinite(s) || isNaN(s)) return '0:00';
+            return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+        }
+
+        function stopCurrent() {
+            if (!current) return;
+            current.audio.pause();
+            current.btn.innerHTML = PLAY;
+            current.btn.setAttribute('aria-label', 'Play');
+            current.imgWrap.classList.remove('visible');
+            current.scrubRow.classList.remove('visible');
+            current.scrubSlider.value = 0;
+            current.curTime.textContent = '0:00';
+            current = null;
+        }
+
+        volumeSlider.addEventListener('input', function() {
+            if (current) current.audio.volume = parseFloat(volumeSlider.value);
+        });
+
+        document.querySelectorAll('.track').forEach(function(trackEl) {
+            var src         = trackEl.dataset.src;
+            var btn         = trackEl.querySelector('.play-btn');
+            var imgWrap     = trackEl.querySelector('.track-image');
+            var scrubRow    = trackEl.querySelector('.scrub-row');
+            var scrubSlider = trackEl.querySelector('.scrub-slider');
+            var curTime     = trackEl.querySelector('.current-time');
+            var totTime     = trackEl.querySelector('.total-time');
+            var audio       = null;
+            var scrubbing   = false;
+
+            function getOrCreateAudio() {
+                if (audio) return audio;
+                audio = new Audio(src);
+                audio.volume = parseFloat(volumeSlider.value);
+
+                audio.addEventListener('loadedmetadata', function() {
+                    totTime.textContent = fmt(audio.duration);
+                });
+
+                audio.addEventListener('timeupdate', function() {
+                    if (scrubbing || !audio.duration) return;
+                    scrubSlider.value = (audio.currentTime / audio.duration) * 100;
+                    curTime.textContent = fmt(audio.currentTime);
+                });
+
+                audio.addEventListener('ended', function() {
+                    stopCurrent();
+                });
+
+                return audio;
             }
 
-            volumeSlider.addEventListener('input', function() {
-                if (current) current.audio.volume = parseFloat(this.value);
+            scrubSlider.addEventListener('mousedown', function() { scrubbing = true; });
+            scrubSlider.addEventListener('touchstart', function() { scrubbing = true; });
+            scrubSlider.addEventListener('mouseup',   function() { scrubbing = false; });
+            scrubSlider.addEventListener('touchend',  function() { scrubbing = false; });
+
+            scrubSlider.addEventListener('input', function() {
+                if (!audio) return;
+                curTime.textContent = fmt((parseFloat(scrubSlider.value) / 100) * audio.duration);
             });
 
-            document.querySelectorAll('.track').forEach(function(trackEl) {
-                const src        = trackEl.dataset.src;
-                const btn        = trackEl.querySelector('.play-btn');
-                const imgWrap    = trackEl.querySelector('.track-image');
-                const scrubRow   = trackEl.querySelector('.scrub-row');
-                const scrubSlider = trackEl.querySelector('.scrub-slider');
-                const curTime    = trackEl.querySelector('.current-time');
-                const totTime    = trackEl.querySelector('.total-time');
-                let audio        = null;
-                let scrubbing    = false;
-
-                function initAudio() {
-                    if (audio) return;
-                    audio = new Audio(src);
-                    audio.volume = parseFloat(volumeSlider.value);
-
-                    audio.addEventListener('loadedmetadata', function() {
-                        totTime.textContent = fmt(audio.duration);
-                    });
-
-                    audio.addEventListener('timeupdate', function() {
-                        if (scrubbing || !audio.duration) return;
-                        scrubSlider.value = (audio.currentTime / audio.duration) * 100;
-                        curTime.textContent = fmt(audio.currentTime);
-                    });
-
-                    audio.addEventListener('ended', stopCurrent);
-                }
-
-                // scrub interactions
-                scrubSlider.addEventListener('mousedown', function() { scrubbing = true; });
-                scrubSlider.addEventListener('touchstart', function() { scrubbing = true; });
-
-                scrubSlider.addEventListener('input', function() {
-                    if (!audio) return;
-                    const t = (parseFloat(this.value) / 100) * audio.duration;
-                    curTime.textContent = fmt(t);
-                });
-
-                scrubSlider.addEventListener('change', function() {
-                    if (!audio || !audio.duration) return;
-                    audio.currentTime = (parseFloat(this.value) / 100) * audio.duration;
-                    scrubbing = false;
-                });
-
-                scrubSlider.addEventListener('mouseup', function() { scrubbing = false; });
-                scrubSlider.addEventListener('touchend', function() { scrubbing = false; });
-
-                function stopCurrent() {
-                    if (!current) return;
-                    current.audio.pause();
-                    current.btn.innerHTML = PLAY;
-                    current.btn.setAttribute('aria-label', 'Play');
-                    current.imgWrap.classList.remove('visible');
-                    current.scrubRow.classList.remove('visible');
-                    current = null;
-                }
-
-                btn.addEventListener('click', function() {
-                    const isPlaying = current && current.trackEl === trackEl;
-                    stopCurrent();
-                    if (!isPlaying) {
-                        initAudio();
-                        audio.play().catch(function(){});
-                        btn.innerHTML = PAUSE;
-                        btn.setAttribute('aria-label', 'Pause');
-                        imgWrap.classList.add('visible');
-                        scrubRow.classList.add('visible');
-                        current = { trackEl, audio, btn, imgWrap, scrubRow };
-                    }
-                });
+            scrubSlider.addEventListener('change', function() {
+                if (!audio || !audio.duration) return;
+                audio.currentTime = (parseFloat(scrubSlider.value) / 100) * audio.duration;
+                scrubbing = false;
             });
-        })();
+
+            btn.addEventListener('click', function() {
+                var isPlaying = current && current.trackEl === trackEl;
+                stopCurrent();
+                if (!isPlaying) {
+                    var a = getOrCreateAudio();
+                    a.play().catch(function(e) { console.error(e); });
+                    btn.innerHTML = PAUSE;
+                    btn.setAttribute('aria-label', 'Pause');
+                    imgWrap.classList.add('visible');
+                    scrubRow.classList.add('visible');
+                    current = {
+                        trackEl:     trackEl,
+                        audio:       a,
+                        btn:         btn,
+                        imgWrap:     imgWrap,
+                        scrubRow:    scrubRow,
+                        scrubSlider: scrubSlider,
+                        curTime:     curTime
+                    };
+                }
+            });
+        });
     </script>
 </body>
 </html>
